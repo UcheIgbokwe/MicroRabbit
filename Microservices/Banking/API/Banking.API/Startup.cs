@@ -32,17 +32,12 @@ namespace Banking.API
         {
             services.AddDbContext<BankingDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("BankingDBConnectionString")));
 
-            RegisterServices(services);
+            DependencyContainer.RegisterServices(services);
 
             services.AddMediatR(typeof(Startup));
             
             services.AddControllers();
             services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "Banking.API", Version = "v1" }));
-        }
-
-        private static void RegisterServices(IServiceCollection services)
-        {
-            DependencyContainer.RegisterServices(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
