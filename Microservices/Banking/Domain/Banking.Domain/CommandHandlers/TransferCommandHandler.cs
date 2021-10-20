@@ -20,6 +20,8 @@ namespace Banking.Domain.CommandHandlers
         }
         public async Task<bool> Handle(CreateTransferCommand request, CancellationToken cancellationToken)
         {
+            //write to db or do whatever
+            
             //Publish event to RabbitMQ
             _bus.Publish(new TransferCreatedEvent(request.Source, request.Destination, request.Amount));
             
