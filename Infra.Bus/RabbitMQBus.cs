@@ -8,7 +8,6 @@ using Domain.Core.Commands;
 using Domain.Core.Events;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Domain.Core.Bus;
 using Infra.IoC;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -15,6 +16,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Transfer.Data.Context;
+using Transfer.Domain.EventHandlers;
+using Transfer.Domain.Events;
 
 namespace API
 {
@@ -59,6 +62,14 @@ namespace API
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => endpoints.MapControllers());
+
+            ConfigureEventBus(app);
+        }
+
+        private static void ConfigureEventBus(IApplicationBuilder app)
+        {
+            var eventBus = app.ApplicationServices.GetRequiredService<IEventBus>();
+            eventBus.Subscribe<TransferCreatedEvent, TransferEventHandler>();
         }
     }
 }
