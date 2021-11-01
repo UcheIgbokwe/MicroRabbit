@@ -7,6 +7,8 @@
   <ItemGroup>
     <PackageReference Include="MediatR" Version="9.0.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.11" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.2" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
@@ -16,6 +18,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\Infra.IoC\Infra.IoC.csproj" />
     <ProjectReference Include="..\..\Data\Banking.Data\Banking.Data.csproj" />
+    <ProjectReference Include="..\..\Application\Banking.Application\Banking.Application.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using Banking.Application.Interfaces;
 using Banking.Application.Services;
@@ -43,6 +44,9 @@ namespace Infra.IoC
 
             //Domain Banking Commands
             services.AddTransient<IRequestHandler<CreateTransferCommand, bool>, TransferCommandHandler>();
+
+            //Domain Banking Queries
+            services.AddMediatR(typeof(GetAccountsQueryHandler).GetTypeInfo().Assembly);
 
             //Application Services
             services.AddTransient<IAccountService, AccountService>();
