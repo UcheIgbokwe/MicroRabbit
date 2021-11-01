@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Banking.API.Filters;
 using Banking.Data.Context;
 using Infra.IoC;
 using MediatR;
@@ -30,6 +31,12 @@ namespace Banking.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(opt => opt.AddPolicy("CorsPolicy", policy => policy.AllowAnyHeader().AllowAnyMethod().WithExposedHeaders("WWW-Authenticate").WithOrigins("http://localhost:8080").AllowCredentials()));
+
+            services.AddControllers(options => options.Filters.Add<UnhandledExceptionFilterAttribute>())
+                .AddNewtonsoftJson();
+
+                
             services.AddDbContext<BankingDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("BankingDBConnectionString")));
 
             DependencyContainer.RegisterServices(services);
@@ -52,7 +59,9 @@ namespace Banking.API
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Banking.API v1"));
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
+
+            app.UseCors("CorsPolicy");
 
             app.UseRouting();
 
